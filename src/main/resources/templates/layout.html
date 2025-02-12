@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.timeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">SzyncPound</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body >
+
+<nav class="navbar">
+    <div class="navbar-container">
+        <span class="navbar-logo"><a th:href="@{/}"SzyncPound</a></span>
+        <ul class="navbar-menu">
+            <li sec:authorize="isAuthenticated()"><a class="navbar-link" th:href="@{/post/new}">&#127381; Post</a></li>
+            <li><a class="navbar-link" th:href="@{/}">Trending</a></li>
+            <li><a class="navbar-link" th:href="@{/following}">Following</a></li>
+            <li sec:authorize="isAuthenticated()"><a class="navbar-link" th:href="@{/profile}">Profile</a></li>
+            <li sec:authorize="!isAuthenticated()"><a class="navbar-link" th:href="@{/login}">Login</a></li>
+            <li sec:authorize="isAuthenticated()"><a class="navbar-link" th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main layout:fragment="main" class="container">
+
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <p>&copy; 2023 SzyncPound. All rights rejected.</p>
+    </div>
+</footer>
+</body>
+</html>

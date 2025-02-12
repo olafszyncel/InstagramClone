@@ -1,0 +1,28 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <title>Creating post...</title>
+</head>
+
+<body>
+<main layout:fragment="main">
+    <div class="feed-container">
+
+        <div class="post">
+            <div class="post-header">
+                <span class="username" th:text="${post.user.username}"></span>
+                <span class="date" th:text="${post.createdOn}"></span>
+            </div>
+            <img th:src="${post.photoUrl}" alt="Post image" class="post-image">
+            <div class="post-description" th:text="${post.content}"></div>
+            <div th:if="${user.id} == ${post.user.id}">
+                <a class="login-button" th:href="@{/post/{postId}/edit(postId=${post.id})}">Edit</a>
+                <a class="login-button" th:href="@{/post/{postId}/delete(postId=${post.id})}">Delete</a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

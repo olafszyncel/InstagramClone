@@ -1,0 +1,32 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <title>Creating post...</title>
+</head>
+
+<body>
+<main layout:fragment="main">
+    <div class="login-container">
+        <h2>Create your post</h2>
+        <form class="login-form" method="post" role="form" th:action="@{/post/{postId}/edit(postId=${post.id})}" th:object="${post}">
+            <div class="form-group">
+                <label for="content">Content</label>
+                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{photoUrl}">
+                <input
+                        type="text"
+                        id="content"
+                        name="content"
+                        th:field="*{content}"
+                        placeholder="Enter some text" >
+                <p th:if="${#fields.hasErrors('content')}" class="text-danger" th:errors="*{content}"></p>
+            </div>
+
+            <button type="submit" class="login-button" >Edit</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>
