@@ -9,10 +9,14 @@ public interface PostService {
     void createPost(long userId, PostDto postDto);
 
     List<PostDto> findAllPosts();
+    List<PostDto> findAllByFollowing(long userId);
 
     PostDto findPostById(long postId);
+
+    List<PostDto> findPostsByUserId(long userId);
 
     void updatePost(PostDto post);
 
     void deletePost(long postId);
+
 }

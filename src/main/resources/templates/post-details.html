@@ -3,7 +3,7 @@
         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
         layout:decorate="~{layout}">
 <head>
-    <title>Creating post...</title>
+    <title th:text="${post.user.username}">post</title>
 </head>
 
 <body>

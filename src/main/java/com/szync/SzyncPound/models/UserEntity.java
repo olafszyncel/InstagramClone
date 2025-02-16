@@ -22,6 +22,8 @@ public class UserEntity {
     private String fullName;
     private String email;
     private String password;
+
+    // ROLES SYSTEM
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
@@ -30,6 +32,32 @@ public class UserEntity {
     )
     private List<Role> roles = new ArrayList<>();
 
+    // POST SYSTEM:
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Post> posts = new ArrayList<>();
+
+    // FOLLOW SYSTEM:
+    @OneToMany(mappedBy = "follower", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Follow> followings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "following", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Follow> followers = new ArrayList<>();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

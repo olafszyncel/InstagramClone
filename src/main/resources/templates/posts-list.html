@@ -9,11 +9,19 @@
 <body>
     <main layout:fragment="main">
 
+        <div th:if="${param.nofollow}" class="alert alert-success">
+            <h2>You do not follow any one!</h2>
+        </div>
+
         <div class="feed-container" th:each="post :${posts}">
+
+
 
             <div class="post">
                 <div class="post-header">
-                    <span class="username" th:text="${post.user.username}"></span>
+                    <a th:href="@{/profile/{username}(username=${post.user.username})}">
+                        <span class="username" th:text="${post.user.username}"></span>
+                    </a>
                     <span class="date" th:text="${post.createdOn}"></span>
                 </div>
                 <a th:href="@{/post/{postId}(postId=${post.id})}">

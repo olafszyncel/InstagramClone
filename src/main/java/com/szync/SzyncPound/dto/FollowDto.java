@@ -13,12 +13,11 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostDto {
+public class FollowDto {
     private long id;
-    private String content;
     @NotEmpty
-    private String photoUrl;
+    private UserEntity following;
+    @NotEmpty
+    private UserEntity follower;
     private LocalDateTime createdOn;
-    private LocalDateTime updatedOn;
-    private UserEntity user;
 }

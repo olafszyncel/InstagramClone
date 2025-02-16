@@ -41,9 +41,21 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<PostDto> findAllByFollowing(long userId) {
+        List<Post> posts = postRepository.findPostsByFollowing(userId);
+        return posts.stream().map(post -> mapToPostDto(post)).collect(Collectors.toList());
+    }
+
+    @Override
     public PostDto findPostById(long postId) {
         Post post = postRepository.findById(postId).get();
         return mapToPostDto(post);
+    }
+
+    @Override
+    public List<PostDto> findPostsByUserId(long userId) {
+        List<Post> posts = postRepository.findAllByUserIdOrderByIdDesc(userId);
+        return posts.stream().map(post -> mapToPostDto(post)).collect(Collectors.toList());
     }
 
     @Override

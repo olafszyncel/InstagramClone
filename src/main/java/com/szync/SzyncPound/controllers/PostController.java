@@ -4,6 +4,7 @@ import com.szync.SzyncPound.dto.PostDto;
 import com.szync.SzyncPound.models.Post;
 import com.szync.SzyncPound.models.UserEntity;
 import com.szync.SzyncPound.security.SecurityUtil;
+import com.szync.SzyncPound.service.FollowService;
 import com.szync.SzyncPound.service.PostService;
 import com.szync.SzyncPound.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,13 @@ import java.util.List;
 public class PostController {
     private UserService userService;
     private PostService postService;
+    private FollowService followService;
 
     @Autowired
-    public PostController(UserService userService, PostService postService) {
+    public PostController(UserService userService, PostService postService, FollowService followService) {
         this.userService = userService;
         this.postService = postService;
+        this.followService = followService;
     }
 
     @GetMapping("/")
@@ -40,6 +43,27 @@ public class PostController {
         model.addAttribute("user", user);
         model.addAttribute("posts", posts);
         return "posts-list";
+    }
+
+    @GetMapping("/following")
+    public String following(Model model) {
+        UserEntity user = new UserEntity();
+        String email = SecurityUtil.getSessionUser();
+
+        if(email != null) {
+            user = userService.findByEmail(email);
+            long followersCount = followService.countFollower(user);
+            if(followersCount > 0) {
+                List<PostDto> posts = postService.findAllByFollowing(user.getId());
+                model.addAttribute("user", user);
+                model.addAttribute("posts", posts);
+                return "posts-list";
+            } else {
+                return "redirect:/?nofollow";
+            }
+
+        }
+       return "redirect:/";
     }
 
     @GetMapping("/post/new")
@@ -91,7 +115,10 @@ public class PostController {
             user = userService.findByEmail(email);
             model.addAttribute("user", user);
             model.addAttribute("post", post);
-            return "post-edit";
+            if(user.getId() == post.getUser().getId()){
+                return "post-edit";
+            }
+
         }
         return "redirect:/post/" + postId;
     }
