@@ -24,10 +24,42 @@
                     </a>
                     <span class="date" th:text="${post.createdOn}"></span>
                 </div>
+
                 <a th:href="@{/post/{postId}(postId=${post.id})}">
                     <img th:src="${post.photoUrl}" alt="Post image" class="post-image">
-                    <div class="post-description" th:text="${post.content}"></div>
                 </a>
+
+                <div th:if="${#lists.contains(post.likes.![user.id], user.id)}">
+                    <button th:attr="onclick='likeHandler(' + ${post.id} + ')'" th:id="${post.id}">Liked</button>
+                </div>
+                <div th:unless="${#lists.contains(post.likes.![user.id], user.id)}">
+                    <button th:attr="onclick='likeHandler(' + ${post.id} + ')'" th:id="${post.id}">Like</button>
+                </div>
+
+                <div>Likes: <span th:id="'likes-number-' + ${post.id}" th:text="${#lists.size(post.likes)}"></span></div>
+
+                <div class="post-description" th:text="${post.content}"></div>
+
+                <div class="coment-box" >
+
+                    <input type="hidden" th:id="'comment-user-' + ${post.id}" th:value="${user.id}">
+                    <input type="hidden" th:id="'comment-username-' + ${post.id}" th:value="${user.username}">
+                    <input type="text" class="comment-input" th:id="'comment-input-' + ${post.id}">
+                    <button th:attr="onclick='commentHandler(' + ${post.id} + ')'"> > </button>
+
+                    <div class="comments" th:id="'comments-' + ${post.id}">
+
+                        <div  th:each="comment :${post.comments}">
+                            <div class="comment" >
+                                <a class="comment-user" th:href="@{/profile/{username}(username=${comment.user.username})}" th:text="${comment.user.username}"></a>
+                                <p class="comment-content" th:text="${comment.content}"></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
         </div>
 

@@ -75,10 +75,10 @@ public class FollowController {
             user = userService.findByEmail(email);
             UserEntity profileUser = userService.findByUsername(profileUsername);
             if(user != profileUser) {
-                // sprawdz czy jest juz obs jesli tak to usun
+
                 Optional<Follow> existingFollow = followService.findByFollowerAndFollowing(user, profileUser);
+
                 if(existingFollow.isPresent()) {
-                    //tu delete
                     followService.unfollow(existingFollow.get().getId());
                 }
                 else {

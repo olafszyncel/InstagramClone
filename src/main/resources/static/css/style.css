@@ -209,3 +209,8 @@ a:link, a:visited {
 a:link:active, a:visited:active {
     color: #333;
 }
+
+.comment-input {
+    resize: none;
+    height: auto;
+}

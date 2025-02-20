@@ -40,6 +40,7 @@ public class PostController {
         if(email != null) {
             user = userService.findByEmail(email);
         }
+
         model.addAttribute("user", user);
         model.addAttribute("posts", posts);
         return "posts-list";

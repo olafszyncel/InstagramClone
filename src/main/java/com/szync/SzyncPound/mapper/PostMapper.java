@@ -12,6 +12,8 @@ public class PostMapper {
                 .createdOn(postDto.getCreatedOn())
                 .updatedOn(postDto.getUpdatedOn())
                 .user(postDto.getUser())
+                .likes(postDto.getLikes())
+                .comments(postDto.getComments().reversed())
                 .build();
     }
 
@@ -23,6 +25,8 @@ public class PostMapper {
                 .createdOn(post.getCreatedOn())
                 .updatedOn(post.getUpdatedOn())
                 .user(post.getUser())
+                .likes(post.getLikes())
+                .comments(post.getComments().reversed())
                 .build();
     }
 }
