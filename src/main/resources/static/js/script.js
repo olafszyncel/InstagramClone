@@ -94,7 +94,7 @@ function afterCommentAdding(content, username, postId, commentId) {
     const commentDropdownLi = commentDropdown.appendChild(document.createElement("li"));
     const commentDropdownLink = commentDropdownLi.appendChild(document.createElement("a"));
     commentDropdownLink.innerText = "delete";
-    commentDropdownLink.href = `/comment/${commentId}/delete`;
+    commentDropdownLink.onclick = function() {deleteCommentHandler(commentId)};
 
     const commentContent = commentDiv.appendChild(document.createElement("p"));
     commentContent.classList.add("comment-content");
@@ -127,4 +127,37 @@ function deleteCommentHandler(commentId) {
         });
 
 }
+
+async function searchUsers() {
+    const query = document.getElementById("searchInput").value.trim();
+    const resultsContainer = document.getElementById("searchResults");
+
+    if (query.length < 1) {
+        resultsContainer.innerHTML = "";
+        resultsContainer.classList.add("hidden");
+        return;
+    }
+
+    try {
+        const response = await fetch(`/search/profile?query=${encodeURIComponent(query)}`);
+        const users = await response.json();
+
+        resultsContainer.innerHTML = users.length
+            ? users.map(user => `<div class="p-3 hover:bg-gray-100 border-b">
+                                            <a href="/profile/${user}" class="block text-blue-600">${user}</a>
+                                        </div>`).join("")
+            : `<div class="p-3 text-gray-500">No results found</div>`;
+
+        resultsContainer.classList.remove("hidden");
+    } catch (error) {
+        console.error("Error fetching search results:", error);
+    }
+}
+
+
+document.getElementById("searchInput").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+    }
+});
 

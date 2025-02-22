@@ -16,8 +16,14 @@
 
 <nav class="navbar">
     <div class="navbar-container">
-        <span class="navbar-logo"><a th:href="@{/}"SzyncPound</a></span>
+        <span class="navbar-logo"><a th:href="@{/}">SzyncPound</a></span>
         <ul class="navbar-menu">
+
+            <div>
+                <input id="searchInput" type="text" placeholder="Search..." oninput="searchUsers()" autocomplete="off">
+                <div id="searchResults" class="mt-2 bg-white border rounded-lg shadow-sm hidden"></div>
+            </div>
+
             <li sec:authorize="isAuthenticated()"><a class="navbar-link" th:href="@{/post/new}">&#127381; Post</a></li>
             <li><a class="navbar-link" th:href="@{/}">Trending</a></li>
             <li><a class="navbar-link" th:href="@{/following}">Following</a></li>

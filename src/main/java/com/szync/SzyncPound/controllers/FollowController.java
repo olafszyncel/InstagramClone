@@ -16,10 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -90,6 +87,12 @@ public class FollowController {
             }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "User not logged in"));
+    }
+
+    @GetMapping("/search/profile")
+    public ResponseEntity<?> searchProfile(@RequestParam(value="query") String guery, Model model) {
+        List<String> usernames = userService.searchUsers(guery);
+        return ResponseEntity.ok(usernames);
     }
 
 }

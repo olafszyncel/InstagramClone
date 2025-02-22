@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -45,5 +46,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public List<String> searchUsers(String query) {
+        return userRepository.searchUsernames(query);
     }
 }
