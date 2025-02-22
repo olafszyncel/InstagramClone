@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.szync.SzyncPound.models.Like;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class LikeController {
         this.userService = userService;
     }
 
-    @GetMapping("/like/{postId}")
+    @PostMapping("/like/{postId}")
     public ResponseEntity<?> likePost(@PathVariable long postId) {
         UserEntity user = new UserEntity();
         String email = SecurityUtil.getSessionUser();
@@ -49,7 +50,7 @@ public class LikeController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "User not logged in"));
     }
 
-    @GetMapping("/unlike/{postId}")
+    @PostMapping("/unlike/{postId}")
     public ResponseEntity<?> unlikePost(@PathVariable long postId) {
         UserEntity user = new UserEntity();
         String email = SecurityUtil.getSessionUser();

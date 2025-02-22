@@ -4,6 +4,7 @@ package com.szync.SzyncPound.controllers;
 import com.szync.SzyncPound.dto.FollowDto;
 import com.szync.SzyncPound.dto.PostDto;
 import com.szync.SzyncPound.models.Follow;
+import com.szync.SzyncPound.models.Like;
 import com.szync.SzyncPound.models.Post;
 import com.szync.SzyncPound.models.UserEntity;
 import com.szync.SzyncPound.security.SecurityUtil;
@@ -11,6 +12,8 @@ import com.szync.SzyncPound.service.FollowService;
 import com.szync.SzyncPound.service.PostService;
 import com.szync.SzyncPound.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -67,27 +71,25 @@ public class FollowController {
     }
 
     @PostMapping("/follow/{profileUsername}")
-    public String follow(@PathVariable("profileUsername") String profileUsername, Model model) {
+    public ResponseEntity<?> follow(@PathVariable("profileUsername") String profileUsername, Model model) {
         UserEntity user = new UserEntity();
-
         String email = SecurityUtil.getSessionUser();
         if(email != null) {
             user = userService.findByEmail(email);
             UserEntity profileUser = userService.findByUsername(profileUsername);
             if(user != profileUser) {
-
                 Optional<Follow> existingFollow = followService.findByFollowerAndFollowing(user, profileUser);
-
                 if(existingFollow.isPresent()) {
                     followService.unfollow(existingFollow.get().getId());
+                    return ResponseEntity.ok(Map.of("status", "unfollowed"));
                 }
                 else {
                     followService.follow(user.getId(), profileUser.getId());
+                    return ResponseEntity.ok(Map.of("status", "followed"));
                 }
             }
         }
-
-        return "redirect:/profile/" + profileUsername;
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "User not logged in"));
     }
 
 }

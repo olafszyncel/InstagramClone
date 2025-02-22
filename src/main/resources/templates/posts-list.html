@@ -14,20 +14,17 @@
         </div>
 
         <div class="feed-container" th:each="post :${posts}">
-
-
-
             <div class="post">
                 <div class="post-header">
-                    <a th:href="@{/profile/{username}(username=${post.user.username})}">
+                    <a class="comment-user" th:href="@{/profile/{username}(username=${post.user.username})}">
                         <span class="username" th:text="${post.user.username}"></span>
                     </a>
                     <span class="date" th:text="${post.createdOn}"></span>
                 </div>
-
                 <a th:href="@{/post/{postId}(postId=${post.id})}">
                     <img th:src="${post.photoUrl}" alt="Post image" class="post-image">
                 </a>
+                <div class="post-description" th:text="${post.content}"></div>
 
                 <div th:if="${#lists.contains(post.likes.![user.id], user.id)}">
                     <button th:attr="onclick='likeHandler(' + ${post.id} + ')'" th:id="${post.id}">Liked</button>
@@ -37,8 +34,6 @@
                 </div>
 
                 <div>Likes: <span th:id="'likes-number-' + ${post.id}" th:text="${#lists.size(post.likes)}"></span></div>
-
-                <div class="post-description" th:text="${post.content}"></div>
 
                 <div class="coment-box" >
 
@@ -50,9 +45,19 @@
                     <div class="comments" th:id="'comments-' + ${post.id}">
 
                         <div  th:each="comment :${post.comments}">
-                            <div class="comment" >
+                            <div class="comment" th:id="'comment-' + ${comment.id}">
                                 <a class="comment-user" th:href="@{/profile/{username}(username=${comment.user.username})}" th:text="${comment.user.username}"></a>
+
+                                <div th:if="${user.id == comment.user.id || user.id == post.user.id}">
+
+                                    <ul class="dropdown">
+                                        <li><a th:attr="onclick='deleteCommentHandler(' + ${comment.id} + ')'">delete</a></li>
+                                    </ul>
+
+                                </div>
+
                                 <p class="comment-content" th:text="${comment.content}"></p>
+
                             </div>
                         </div>
 

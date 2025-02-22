@@ -1,23 +1,21 @@
 function likeHandler(postId) {
-    const btn = document.getElementById(`${postId}`);
+    const btn = document.getElementById(postId);
     const likes= document.getElementById(`likes-number-${postId}`);
-    console.log(likes.innerText);
-    LikeOrUnlike = btn.innerText;
+    let LikeOrUnlike = btn.innerText;
 
 
 
     if(LikeOrUnlike === "Like") {
         // trzeba dodac like
-        fetch(`/like/${postId}`)
+        fetch(`/like/${postId}`, {method: 'POST'})
             .then(response => response.json)
             .then(result => {
                 btn.innerText = "Liked";
-                calculating = parseInt(likes.innerText) + 1;
-                likes.innerText = calculating;
+                likes.innerText = `${parseInt(likes.innerText) + 1}`;
             })
     } else {
         // trzeba usunac like
-        fetch(`/unlike/${postId}`)
+        fetch(`/unlike/${postId}`, {method: 'POST'})
             .then(response => response.json)
             .then(result => {
                 btn.innerText = "Like";
@@ -25,6 +23,28 @@ function likeHandler(postId) {
                 likes.innerText = calculating;
             })
     }
+}
+
+function followHandler(username) {
+    const btn = document.getElementById("followButton");
+    const follows = document.getElementById("followersCount");
+    let FollowOrUnfollow = btn.innerText;
+
+    username = username.replaceAll("&#39;", "'");
+
+    fetch(`/follow/${username}`, {method: 'POST'})
+        .then(response => response.json)
+        .then(result => {
+
+            if(FollowOrUnfollow === "Follow") {
+                btn.innerText = "Following";
+                follows.innerText = `${parseInt(follows.innerText) + 1}`;
+            } else {
+                btn.innerText = "Follow";
+                follows.innerText = `${parseInt(follows.innerText) - 1}`;
+            }
+
+        })
 }
 
 function commentHandler(postId) {
@@ -50,9 +70,8 @@ function commentHandler(postId) {
             }
         })
         .then(data => {
-            console.log('Komentarz został zapisany:', data);
             document.getElementById(`comment-input-${postId}`).value = '';
-            afterCommentAdding(commentContent, username, postId);
+            afterCommentAdding(commentContent, username, postId, data.id);
         })
         .catch(error => {
             console.error('Błąd:', error);
@@ -60,26 +79,52 @@ function commentHandler(postId) {
 
 }
 
-function afterCommentAdding(content, username, postId) {
+function afterCommentAdding(content, username, postId, commentId) {
     const commentDiv = document.createElement("div");
     commentDiv.classList.add("comment");
+    commentDiv.id = `comment-${commentId}`;
 
     const commentUser = commentDiv.appendChild(document.createElement("a"));
     commentUser.classList.add("comment-user");
     commentUser.innerText = username;
     commentUser.href = `/profile/${username}`;
 
+    const commentDropdown = commentDiv.appendChild(document.createElement("ul"));
+    commentDropdown.classList.add("dropdown")
+    const commentDropdownLi = commentDropdown.appendChild(document.createElement("li"));
+    const commentDropdownLink = commentDropdownLi.appendChild(document.createElement("a"));
+    commentDropdownLink.innerText = "delete";
+    commentDropdownLink.href = `/comment/${commentId}/delete`;
+
     const commentContent = commentDiv.appendChild(document.createElement("p"));
     commentContent.classList.add("comment-content");
     commentContent.innerText = content;
 
-    commentDiv.appendChild(commentUser);
-    commentDiv.appendChild(commentContent);
-
     const commentsContainer = document.querySelector(`#comments-${postId}`);
     if (!commentsContainer) {
-        console.error(`Nie znaleziono elementu z klasą .comments-${postId}`);
         return;
     }
     commentsContainer.prepend(commentDiv);
 }
+
+function deleteCommentHandler(commentId) {
+    const box = document.getElementById(`comment-${commentId}`);
+
+    fetch(`/comment/${commentId}/delete`, {method: "POST"})
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Błąd podczas usuwania komentarza');
+            }
+        })
+        .then(data => {
+            box.style.display = 'none';
+
+        })
+        .catch(error => {
+            console.error('Błąd:', error);
+        });
+
+}
+

@@ -13,19 +13,21 @@
 
         <h3 th:text="${userProfile.username}"></h3>
         <div style="display: inline-block">
-            <h5>Followers: </h5><h5 th:text="${followingsCount}"></h5>
+            <h5>Followers: </h5><h5 th:text="${followingsCount}" id="followersCount"></h5>
             <h5> Following:</h5><h5 th:text="${followersCount}"></h5>
         </div>
 
         <div th:if="${user.id} != ${userProfile.id}">
-            <form method="post" th:action="@{/follow/{profileUsername}(profileUsername=${userProfile.username})}">
-                <div th:if="${follow}">
-                    <button type="submit">Unfollow</button>
-                </div>
-                <div th:unless="${follow}">
-                    <button type="submit">Follow</button>
-                </div>
-            </form>
+
+
+            <div th:if="${follow}">
+                <button th:attr="onclick=|followHandler('${userProfile.username}')|" th:id="followButton">Following</button>
+            </div>
+            <div th:unless="${follow}">
+                <button th:attr="onclick=|followHandler('${userProfile.username}')|" th:id="followButton">Follow</button>
+            </div>
+
+
         </div>
 
     </div>
@@ -34,13 +36,55 @@
     <div class="feed-container" th:each="post :${posts}">
         <div class="post">
             <div class="post-header">
-                <span class="username" th:text="${post.user.username}"></span>
+                <a class="comment-user" th:href="@{/profile/{username}(username=${post.user.username})}">
+                    <span class="username" th:text="${post.user.username}"></span>
+                </a>
                 <span class="date" th:text="${post.createdOn}"></span>
             </div>
             <a th:href="@{/post/{postId}(postId=${post.id})}">
                 <img th:src="${post.photoUrl}" alt="Post image" class="post-image">
-                <div class="post-description" th:text="${post.content}"></div>
             </a>
+            <div class="post-description" th:text="${post.content}"></div>
+
+            <div th:if="${#lists.contains(post.likes.![user.id], user.id)}">
+                <button th:attr="onclick='likeHandler(' + ${post.id} + ')'" th:id="${post.id}">Liked</button>
+            </div>
+            <div th:unless="${#lists.contains(post.likes.![user.id], user.id)}">
+                <button th:attr="onclick='likeHandler(' + ${post.id} + ')'" th:id="${post.id}">Like</button>
+            </div>
+
+            <div>Likes: <span th:id="'likes-number-' + ${post.id}" th:text="${#lists.size(post.likes)}"></span></div>
+
+            <div class="coment-box" >
+
+                <input type="hidden" th:id="'comment-user-' + ${post.id}" th:value="${user.id}">
+                <input type="hidden" th:id="'comment-username-' + ${post.id}" th:value="${user.username}">
+                <input type="text" class="comment-input" th:id="'comment-input-' + ${post.id}">
+                <button th:attr="onclick='commentHandler(' + ${post.id} + ')'"> > </button>
+
+                <div class="comments" th:id="'comments-' + ${post.id}">
+
+                    <div  th:each="comment :${post.comments}">
+                        <div class="comment" th:id="'comment-' + ${comment.id}">
+                            <a class="comment-user" th:href="@{/profile/{username}(username=${comment.user.username})}" th:text="${comment.user.username}"></a>
+
+                            <div th:if="${user.id == comment.user.id || user.id == post.user.id}">
+
+                                    <ul class="dropdown">
+                                        <li><a th:attr="onclick='deleteCommentHandler(' + ${comment.id} + ')'">delete</a></li>
+                                    </ul>
+
+                            </div>
+
+                            <p class="comment-content" th:text="${comment.content}"></p>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
     </div>
 

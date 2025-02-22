@@ -5,6 +5,18 @@ import com.szync.SzyncPound.models.Post;
 
 public class PostMapper {
     public static Post mapToPost(PostDto postDto) {
+        if (postDto.getComments() == null) {
+            return Post.builder()
+                    .id(postDto.getId())
+                    .content(postDto.getContent())
+                    .photoUrl(postDto.getPhotoUrl())
+                    .createdOn(postDto.getCreatedOn())
+                    .updatedOn(postDto.getUpdatedOn())
+                    .user(postDto.getUser())
+                    .likes(postDto.getLikes())
+                    .comments(postDto.getComments())
+                    .build();
+        }
         return Post.builder()
                 .id(postDto.getId())
                 .content(postDto.getContent())
