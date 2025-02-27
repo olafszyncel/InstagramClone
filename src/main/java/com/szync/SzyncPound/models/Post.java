@@ -24,7 +24,6 @@ public class Post {
     private long id;
     private String content;
     private String photoUrl; //DO ZASTĄPIENIA PRZEZ WGRYWANIE PLIKU
-    //Location do dodania
     @CreationTimestamp
     private LocalDateTime createdOn;
     @UpdateTimestamp

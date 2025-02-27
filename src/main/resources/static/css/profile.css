@@ -1,0 +1,45 @@
+.profile-box {
+    max-width: 500px;
+    margin: 20px auto;
+    max-height: 800px;
+    border-bottom: solid 3px white;
+    color: #fff;
+}
+
+.profile-header {
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-follows {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.profile-follows-item {
+    display: flex;
+    font-size: 1.5rem;
+}
+
+.follow-button-box {
+    margin: auto 0;
+}
+
+.follow-button {
+    margin: auto;
+    width: 100px;
+    padding: 0.75rem;
+    background: #aa55ee;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.follow-button:hover {
+    background: #9944dd;
+}

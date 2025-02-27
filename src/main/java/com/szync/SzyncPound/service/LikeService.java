@@ -1,6 +1,5 @@
 package com.szync.SzyncPound.service;
 
-import com.szync.SzyncPound.models.Follow;
 import com.szync.SzyncPound.models.Like;
 
 

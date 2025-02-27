@@ -32,6 +32,9 @@ public class PostController {
         this.followService = followService;
     }
 
+    String redirectToPost = "redirect:/post";
+    String redirectToMain = "redirect:/";
+
     @GetMapping("/")
     public String trending(Model model) {
         UserEntity user = new UserEntity();
@@ -48,11 +51,10 @@ public class PostController {
 
     @GetMapping("/following")
     public String following(Model model) {
-        UserEntity user = new UserEntity();
         String email = SecurityUtil.getSessionUser();
 
         if(email != null) {
-            user = userService.findByEmail(email);
+            UserEntity user = userService.findByEmail(email);
             long followersCount = followService.countFollower(user);
             if(followersCount > 0) {
                 List<PostDto> posts = postService.findAllByFollowing(user.getId());
@@ -64,18 +66,17 @@ public class PostController {
             }
 
         }
-       return "redirect:/";
+       return redirectToMain;
     }
 
     @GetMapping("/post/new")
     public String newPost(Model model) {
-        UserEntity user = new UserEntity();
         String email = SecurityUtil.getSessionUser();
         if(email != null) {
             model.addAttribute("post", new Post());
             return "post-create";
         }
-        return "redirect:/";
+        return redirectToMain;
     }
 
     @PostMapping("/post/new")
@@ -84,14 +85,13 @@ public class PostController {
             model.addAttribute("post", post);
             return "post-create";
         }
-        UserEntity user = new UserEntity();
         String email = SecurityUtil.getSessionUser();
         if(email != null) {
-            user = userService.findByEmail(email);
+            UserEntity user = userService.findByEmail(email);
             postService.createPost(user.getId(), post);
-            return "redirect:/";
+            return redirectToMain;
         }
-        return "redirect:/";
+        return redirectToMain;
     }
 
     @GetMapping("/post/{postId}")
@@ -109,11 +109,10 @@ public class PostController {
 
     @GetMapping("/post/{postId}/edit")
     public String editPost(@PathVariable("postId") Long postId, Model model) {
-        UserEntity user = new UserEntity();
         PostDto post = postService.findPostById(postId);
         String email = SecurityUtil.getSessionUser();
         if(email != null) {
-            user = userService.findByEmail(email);
+            UserEntity user = userService.findByEmail(email);
             model.addAttribute("user", user);
             model.addAttribute("post", post);
             if(user.getId() == post.getUser().getId()){
@@ -121,7 +120,7 @@ public class PostController {
             }
 
         }
-        return "redirect:/post/" + postId;
+        return redirectToPost + postId;
     }
 
     @PostMapping("/post/{postId}/edit")
@@ -135,11 +134,12 @@ public class PostController {
         UserEntity user = userService.findByEmail(SecurityUtil.getSessionUser());
         PostDto postDto = postService.findPostById(postId);
         if(user.getId() == postDto.getUser().getId()) {
+            post.setCreatedOn(postDto.getCreatedOn());
             post.setId(postId);
             post.setUser(postDto.getUser());
             postService.updatePost(post);
         }
-        return "redirect:/post/" + postId;
+        return redirectToPost + postId;
     }
 
     @GetMapping("/post/{postId}/delete")
@@ -148,8 +148,8 @@ public class PostController {
         PostDto post = postService.findPostById(postId);
         if(user.getId() == post.getUser().getId()) {
             postService.deletePost(postId);
-            return "redirect:/";
+            return redirectToMain;
         }
-        return "redirect:/post/" + postId;
+        return redirectToPost + postId;
     }
 }

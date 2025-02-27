@@ -12,7 +12,7 @@
         <div th:if="${param.fail}" class="alert alert-success">
             Username or email already exist.
         </div>
-        <h2>Login</h2>
+        <h2>Register</h2>
         <form class="login-form" method="post" role="form" th:action="@{/register}" th:object="${user}">
             <div class="form-group">
                 <label for="email">Email</label>
@@ -55,7 +55,7 @@
                 <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
             </div>
             <button type="submit" class="login-button" value="log in" th:href="@{/register}">Register</button>
-            <p class="signup-link">Don't have an account? <a th:href="@{/login}">Sign up</a></p>
+            <p class="signup-link">Already have an account? <a th:href="@{/login}">Sign in</a></p>
         </form>
     </div>
 </main>

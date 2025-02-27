@@ -1,7 +1,6 @@
 package com.szync.SzyncPound.service;
 
 import com.szync.SzyncPound.dto.PostDto;
-import com.szync.SzyncPound.models.Post;
 
 import java.util.List;
 

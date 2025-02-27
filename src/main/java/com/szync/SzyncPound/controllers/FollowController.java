@@ -1,11 +1,7 @@
 package com.szync.SzyncPound.controllers;
 
-
-import com.szync.SzyncPound.dto.FollowDto;
 import com.szync.SzyncPound.dto.PostDto;
 import com.szync.SzyncPound.models.Follow;
-import com.szync.SzyncPound.models.Like;
-import com.szync.SzyncPound.models.Post;
 import com.szync.SzyncPound.models.UserEntity;
 import com.szync.SzyncPound.security.SecurityUtil;
 import com.szync.SzyncPound.service.FollowService;
@@ -37,10 +33,9 @@ public class FollowController {
 
     @GetMapping("/profile")
     public String profile() {
-        UserEntity user = new UserEntity();
         String email = SecurityUtil.getSessionUser();
         if(email != null) {
-            user = userService.findByEmail(email);
+            UserEntity user = userService.findByEmail(email);
             return "redirect:/profile/" + user.getUsername();
         }
         return "redirect:/";
@@ -49,10 +44,9 @@ public class FollowController {
     @GetMapping("/profile/{username}")
     public String profile(@PathVariable("username") String username, Model model) {
         UserEntity userProfile = userService.findByUsername(username);
-        UserEntity user = new UserEntity();
         String email = SecurityUtil.getSessionUser();
         if(email != null) {
-            user = userService.findByEmail(email);
+            UserEntity user = userService.findByEmail(email);
             model.addAttribute("user", user);
             Optional<Follow> existingFollow = followService.findByFollowerAndFollowing(user, userProfile);
             model.addAttribute("follow", existingFollow.isPresent());
@@ -68,11 +62,10 @@ public class FollowController {
     }
 
     @PostMapping("/follow/{profileUsername}")
-    public ResponseEntity<?> follow(@PathVariable("profileUsername") String profileUsername, Model model) {
-        UserEntity user = new UserEntity();
+    public ResponseEntity<Map<String, String>> follow(@PathVariable("profileUsername") String profileUsername) {
         String email = SecurityUtil.getSessionUser();
         if(email != null) {
-            user = userService.findByEmail(email);
+            UserEntity user = userService.findByEmail(email);
             UserEntity profileUser = userService.findByUsername(profileUsername);
             if(user != profileUser) {
                 Optional<Follow> existingFollow = followService.findByFollowerAndFollowing(user, profileUser);
@@ -90,8 +83,8 @@ public class FollowController {
     }
 
     @GetMapping("/search/profile")
-    public ResponseEntity<?> searchProfile(@RequestParam(value="query") String guery, Model model) {
-        List<String> usernames = userService.searchUsers(guery);
+    public ResponseEntity<List<String>> searchProfile(@RequestParam(value="query") String query) {
+        List<String> usernames = userService.searchUsers(query);
         return ResponseEntity.ok(usernames);
     }
 

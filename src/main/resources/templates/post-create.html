@@ -8,9 +8,9 @@
 
 <body>
 <main layout:fragment="main">
-    <div class="login-container">
+    <div class="new-post-container">
         <h2>Create your post</h2>
-        <form class="login-form" method="post" role="form" th:action="@{/post/new}" th:object="${post}">
+        <form class="new-post-form" method="post" role="form" th:action="@{/post/new}" th:object="${post}">
             <div class="form-group">
                 <label for="content">Content</label>
                 <input
@@ -34,7 +34,7 @@
                 <p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"></p>
             </div>
 
-            <button type="submit" class="login-button" >Create Post</button>
+            <button type="submit" class="new-post-button" >Create Post</button>
         </form>
     </div>
 </main>
