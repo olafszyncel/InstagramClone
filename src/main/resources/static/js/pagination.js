@@ -12,17 +12,43 @@ function handleScroll() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    userId = document.getElementById("user-id").value;
-    loadMorePosts(window.location.pathname);
+    if(window.location.pathname.split("/")[1] === "post") {
+        window.removeEventListener('scroll', handleScroll);
+        singlePostHandler()
+    } else {
+        userId = document.getElementById("user-id").value;
+        loadMorePosts(window.location.pathname);
+    }
+
 });
+
+function whenCreated(createdOn) {
+    const todayDate = new Date();
+    const postDate = new Date(createdOn);
+    let timeInMinutes = (todayDate.getTime() - postDate.getTime()) / 60000;
+
+    const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+
+    if(timeInMinutes < 60) {
+        return rtf.format(-Math.floor(timeInMinutes), 'minute');
+    }
+    else if(timeInMinutes / 60 < 24){
+        return rtf.format(-Math.floor(timeInMinutes / 60), 'hour'); //hours
+    }
+    else if(timeInMinutes / 1440 < 7) {
+        return rtf.format(-Math.floor(timeInMinutes / 1440), 'day'); //days
+    }
+    else {
+        return rtf.format(-Math.floor(timeInMinutes / 10080), 'week'); //weeks
+    }
+}
 
 
 function loadMorePosts(path) {
+
     loading = true;
     document.getElementById('loading').style.display = 'block';
     path = path === "/" ? "" : path;
-    console.log(path)
-
 
     fetch(`${path}/posts?page=${page}&size=5`)
         .then(response => response.json())
@@ -31,7 +57,6 @@ function loadMorePosts(path) {
             if (posts.length > 0) {
 
                 posts.forEach(post => {
-                    console.log(post);
 
                     const postElement = document.createElement('div');
                     postElement.classList.add('feed-container');
@@ -95,7 +120,7 @@ function loadMorePosts(path) {
                                          <a class="comment-user username" href="/profile/${post.user.username}">
                                              <span>@${post.user.username}</span>
                                          </a>
-                                         <span class="date">${post.createdOn}</span>
+                                         <span class="date">${whenCreated(post.createdOn)}</span>
                                      </div>
                                      <a href="/post/${post.id}">
                                          <img src="${post.photoUrl}" alt="Post image" class="post-image">
@@ -127,4 +152,11 @@ function loadMorePosts(path) {
             loading = false;
             document.getElementById('loading').style.display = 'none';
         });
+}
+
+// handle post in path /post/postId
+function singlePostHandler() {
+    const htmlElement = document.querySelector(".date");
+    const createdOn = htmlElement.innerText;
+    htmlElement.innerText = whenCreated(createdOn);
 }
