@@ -1,0 +1,47 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <title th:text="${userProfile.username}"></title>
+</head>
+
+<body>
+<main layout:fragment="main">
+    <input id="user-id" type="hidden" th:value="${user.id}">
+
+    <div class="profile-box">
+
+        <h3 class="profile-header" th:text="'@' + ${userProfile.username}"></h3>
+        <div class="profile-follows">
+            <div class="profile-follows-item">
+                <h5>Followers:<span th:text="${followingsCount}" id="followersCount"></span></h5>
+            </div>
+            <div class="profile-follows-item">
+                <h5 th:text="'Following: ' +${followersCount}"></h5>
+            </div>
+
+            <div class="follow-button-box" th:if="${user.id} != ${userProfile.id}">
+                <span th:if="${follow}">
+                    <button class="follow-button" th:attr="onclick=|followHandler('${userProfile.username}')|" th:id="followButton">Following</button>
+                </span>
+                <span th:unless="${follow}">
+                    <button class="follow-button" th:attr="onclick=|followHandler('${userProfile.username}')|" th:id="followButton">Follow</button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div id="post-container">
+
+    </div>
+
+
+    <div id="loading" class="pagination-loader">
+        <p>Loading...</p>
+    </div>
+
+
+</main>
+</body>
+</html>

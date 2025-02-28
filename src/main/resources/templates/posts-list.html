@@ -1,28 +1,36 @@
-<html
-        xmlns:th="http://thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout}">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <title>posts</title>
+    <title>Posts</title>
+    <style>
+        .pagination-loader {
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
 </head>
-
 <body>
-    <main layout:fragment="main">
+<main layout:fragment="main">
+    <input id="user-id" type="hidden" th:value="${user.id}">
 
-        <div class="feed-container" th:each="post :${posts}">
+    <div th:if="${param.nofollow}" class="alert alert-success">
+        <h2>You do not follow any one!</h2>
+    </div>
 
-            <div class="post">
-                <div class="post-header">
-                    <span class="username" th:text="${post.user.username}"></span>
-                    <span class="date" th:text="${post.createdOn}"></span>
-                </div>
-                <a th:href="@{/post/{postId}(postId=${post.id})}">
-                    <img th:src="${post.photoUrl}" alt="Post image" class="post-image">
-                    <div class="post-description" th:text="${post.content}"></div>
-                </a>
-            </div>
-        </div>
+    <div id="post-container">
 
-    </main>
+    </div>
+
+
+    <div id="loading" class="pagination-loader">
+        <p>Loading...</p>
+    </div>
+
+</main>
+
+
 </body>
 </html>
