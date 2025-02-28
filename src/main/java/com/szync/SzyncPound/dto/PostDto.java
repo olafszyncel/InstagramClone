@@ -1,5 +1,6 @@
 package com.szync.SzyncPound.dto;
 
+import com.szync.SzyncPound.mapper.PostMapper;
 import com.szync.SzyncPound.models.Comment;
 import com.szync.SzyncPound.models.Like;
 import com.szync.SzyncPound.models.UserEntity;

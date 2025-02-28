@@ -1,5 +1,6 @@
 package com.szync.SzyncPound.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,7 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable = false)
+    @JsonManagedReference
     private UserEntity user;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -1,5 +1,6 @@
 package com.szync.SzyncPound.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +26,7 @@ public class Like {
     private UserEntity user;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 

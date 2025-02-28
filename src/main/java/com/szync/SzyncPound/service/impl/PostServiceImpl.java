@@ -7,6 +7,9 @@ import com.szync.SzyncPound.repository.PostRepository;
 import com.szync.SzyncPound.repository.UserRepository;
 import com.szync.SzyncPound.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,15 +38,17 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDto> findAllPosts() {
-        List<Post> posts = postRepository.findAllByOrderByIdDesc();
-        return posts.stream().map(post -> mapToPostDto(post)).collect(Collectors.toList());
+    public Page<PostDto> findAllPosts(Pageable pageable) {
+        List<Post> posts = postRepository.findAllByOrderByIdDesc(pageable);
+        List<PostDto> postsDto = posts.stream().map(post -> mapToPostDto(post)).collect(Collectors.toList());
+        return new PageImpl<>(postsDto);
     }
 
     @Override
-    public List<PostDto> findAllByFollowing(long userId) {
-        List<Post> posts = postRepository.findPostsByFollowing(userId);
-        return posts.stream().map(post -> mapToPostDto(post)).collect(Collectors.toList());
+    public Page<PostDto> findAllByFollowing(long userId, Pageable pageable) {
+        List<Post> posts = postRepository.findPostsByFollowing(userId, pageable);
+        List<PostDto> postsDto = posts.stream().map(post -> mapToPostDto(post)).collect(Collectors.toList());
+        return new PageImpl<>(postsDto);
     }
 
     @Override
@@ -53,9 +58,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDto> findPostsByUserId(long userId) {
-        List<Post> posts = postRepository.findAllByUserIdOrderByIdDesc(userId);
-        return posts.stream().map(post -> mapToPostDto(post)).collect(Collectors.toList());
+    public Page<PostDto> findPostsByUserId(long userId, Pageable pageable) {
+        List<Post> posts = postRepository.findAllByUserIdOrderByIdDesc(userId, pageable);
+        List<PostDto> postsDto = posts.stream().map(post -> mapToPostDto(post)).collect(Collectors.toList());
+        return new PageImpl<>(postsDto);
     }
 
     @Override

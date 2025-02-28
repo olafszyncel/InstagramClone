@@ -3,6 +3,9 @@ package com.szync.SzyncPound.mapper;
 import com.szync.SzyncPound.dto.PostDto;
 import com.szync.SzyncPound.models.Post;
 
+import java.util.Collections;
+import java.util.Optional;
+
 public class PostMapper {
     public static Post mapToPost(PostDto postDto) {
         if (postDto.getComments() == null) {
@@ -38,7 +41,8 @@ public class PostMapper {
                 .updatedOn(post.getUpdatedOn())
                 .user(post.getUser())
                 .likes(post.getLikes())
-                .comments(post.getComments().reversed())
+                .comments(Optional.ofNullable(post.getComments()).orElse(Collections.emptyList()).reversed())
                 .build();
     }
+
 }

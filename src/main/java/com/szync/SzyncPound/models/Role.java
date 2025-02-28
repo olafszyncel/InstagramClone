@@ -1,5 +1,6 @@
 package com.szync.SzyncPound.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,8 @@ public class Role {
     private long id;
     private String name;
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private List<UserEntity> users = new ArrayList<>();
+
 }
 

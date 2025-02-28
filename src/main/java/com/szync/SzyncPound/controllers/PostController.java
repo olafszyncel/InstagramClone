@@ -8,16 +8,15 @@ import com.szync.SzyncPound.service.FollowService;
 import com.szync.SzyncPound.service.PostService;
 import com.szync.SzyncPound.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
-import java.util.List;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
 
 @Controller
 public class PostController {
@@ -38,35 +37,52 @@ public class PostController {
     @GetMapping("/")
     public String trending(Model model) {
         UserEntity user = new UserEntity();
-        List<PostDto> posts = postService.findAllPosts();
         String email = SecurityUtil.getSessionUser();
         if(email != null) {
             user = userService.findByEmail(email);
         }
 
         model.addAttribute("user", user);
-        model.addAttribute("posts", posts);
         return "posts-list";
     }
 
     @GetMapping("/following")
     public String following(Model model) {
         String email = SecurityUtil.getSessionUser();
-
         if(email != null) {
             UserEntity user = userService.findByEmail(email);
             long followersCount = followService.countFollower(user);
             if(followersCount > 0) {
-                List<PostDto> posts = postService.findAllByFollowing(user.getId());
                 model.addAttribute("user", user);
-                model.addAttribute("posts", posts);
                 return "posts-list";
             } else {
                 return "redirect:/?nofollow";
             }
-
         }
        return redirectToMain;
+    }
+
+    @RequestMapping("/posts")
+    @GetMapping
+    public ResponseEntity<Page<PostDto>> getPosts(@RequestParam(defaultValue = "0") int page,
+                                                  @RequestParam(defaultValue = "5") int size) {
+        Page<PostDto> postPage = postService.findAllPosts(PageRequest.of(page, size));
+        return ResponseEntity.ok(postPage);
+    }
+
+    @RequestMapping("/following/posts")
+    @GetMapping
+    public ResponseEntity<Page<PostDto>> getPostsFollowing(@RequestParam(defaultValue = "0") int page,
+                                                  @RequestParam(defaultValue = "5") int size) {
+
+        String email = SecurityUtil.getSessionUser();
+        UserEntity user = userService.findByEmail(email);
+        long followersCount = followService.countFollower(user);
+        if(followersCount > 0) {
+            Page<PostDto> postPage = postService.findAllByFollowing(user.getId(), PageRequest.of(page, size));
+            return ResponseEntity.ok(postPage);
+        }
+        return null;
     }
 
     @GetMapping("/post/new")

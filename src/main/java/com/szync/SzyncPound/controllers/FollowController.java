@@ -8,6 +8,8 @@ import com.szync.SzyncPound.service.FollowService;
 import com.szync.SzyncPound.service.PostService;
 import com.szync.SzyncPound.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -53,12 +55,22 @@ public class FollowController {
         }
         long followersCount = followService.countFollower(userProfile);
         long followingsCount = followService.countFollowing(userProfile);
-        List<PostDto> posts = postService.findPostsByUserId(userProfile.getId());
         model.addAttribute("followersCount", followersCount);
         model.addAttribute("followingsCount", followingsCount);
         model.addAttribute("userProfile", userProfile);
-        model.addAttribute("posts", posts);
         return "profile";
+    }
+
+    @RequestMapping("/profile/{username}/posts")
+    @GetMapping
+    public ResponseEntity<Page<PostDto>> getPostsProfile(@PathVariable("username") String username,
+                                                           @RequestParam(defaultValue = "0") int page,
+                                                           @RequestParam(defaultValue = "5") int size) {
+
+        UserEntity userProfile = userService.findByUsername(username);
+        Page<PostDto> postPage = postService.findPostsByUserId(userProfile.getId(), PageRequest.of(page, size));
+        return ResponseEntity.ok(postPage);
+
     }
 
     @PostMapping("/follow/{profileUsername}")
