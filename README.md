@@ -6,28 +6,20 @@ SzyncPound is a modern social media application that allows users to publish pos
 
 ## 📸 Screenshots
 
-### 🔹 Home Page
+### 🔹 Home Page 🔹 Post View 🔹 Profile View
 
-
-
-### 🔹 Post View
-
-
-
-### 🔹 Profile View
-
-
+![SzyncPoundMockup](https://github.com/user-attachments/assets/ec3056b9-aff4-4874-9060-20ed6fc54f15)
 
 ---
 
 ## 🚀 Features
 
 - ✅ User registration and login (Spring Security, JWT)
-- ✅ Posting with images
-- ✅ Like and comment system
+- ✅ Posting with images and description
+- ✅ Like, comment and following system
 - ✅ User profile page
 - ✅ Infinite scroll for posts
-- ✅ User and post search
+- ✅ User search
 - ✅ Responsive design (CSS)
 
 ---
@@ -56,14 +48,13 @@ To run the application locally, you need:
 - 📌 **Java 17**
 - 📌 **Docker & Docker Compose**
 
----
 
 ## 🏗️ Installation & Setup
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repository.git
-   cd your-repository
+   git clone https://github.com/olafszyncel/InstagramClone.git
+   cd InstagramClone
    ```
 2. Build the project:
    ```sh
@@ -81,31 +72,6 @@ To start a PostgreSQL database in a Docker container, use the following command:
 ```sh
 docker-compose up -d
 ```
-
----
-
-## 📝 API Endpoints
-
-📌 **Authentication**
-
-- `POST /auth/register` – User registration
-- `POST /auth/login` – Login and obtain JWT token
-
-📌 **Posts**
-
-- `GET /posts` – Fetch all posts (pagination)
-- `POST /posts` – Create a new post
-- `DELETE /posts/{id}` – Delete a post
-
-📌 **Likes & Comments**
-
-- `POST /posts/{id}/like` – Like a post
-- `POST /posts/{id}/comment` – Add a comment
-
-📌 **Users**
-
-- `GET /users/{username}` – Fetch user profile
-- `PUT /users/{id}` – Edit user profile
 
 ---
 
