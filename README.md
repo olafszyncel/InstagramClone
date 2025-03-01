@@ -35,7 +35,7 @@ SzyncPound is a modern social media application that allows users to publish pos
 🔹 JavaScript\
 🔹 CSS
 
-**Other:**
+**Other:**\
 🔹 Docker, Docker Compose\
 🔹 CI/CD (GitHub Actions)
 
