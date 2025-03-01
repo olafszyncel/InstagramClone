@@ -6,17 +6,9 @@ SzyncPound is a modern social media application that allows users to publish pos
 
 ## 📸 Screenshots
 
-### 🔹 Home Page
+### 🔹 Home Page 🔹 Post View 🔹 Profile View
 
-
-
-### 🔹 Post View
-
-
-
-### 🔹 Profile View
-
-
+![SzyncPoundMockup](https://github.com/user-attachments/assets/97b6ecf2-2509-44cf-b1f4-bf485fc094fe)
 
 ---
 
