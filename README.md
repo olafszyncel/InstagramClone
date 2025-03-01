@@ -33,9 +33,9 @@ SzyncPound is a modern social media application that allows users to publish pos
 
 **Frontend:**\
 🔹 JavaScript\
-🔹 CSS\
+🔹 CSS
 
-**Other:**\
+**Other:**
 🔹 Docker, Docker Compose\
 🔹 CI/CD (GitHub Actions)
 
@@ -58,7 +58,7 @@ To run the application locally, you need:
    ```
 2. Build the project:
    ```sh
-   ./mvnw clean install
+   ./mvnw clean package -DskipTests
    ```
 3. Run the application:
    ```sh
@@ -77,5 +77,5 @@ docker-compose up -d
 
 ## 🔗 Contact
 
-📩 Author: **Olaf Szyncel**\
+📩 Author: **Olaf Szyncel**
 
