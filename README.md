@@ -29,7 +29,7 @@ SzyncPound is a modern social media application that allows users to publish pos
 **Backend:**\
 🔹 Java 17, Spring Boot 3\
 🔹 Spring Security, JWT\
-🔹 Hibernate, JPA, PostgreSQL\
+🔹 Hibernate, JPA, PostgreSQL
 
 **Frontend:**\
 🔹 JavaScript\
