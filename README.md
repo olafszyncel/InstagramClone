@@ -29,11 +29,11 @@ SzyncPound is a modern social media application that allows users to publish pos
 **Backend:**\
 🔹 Java 17, Spring Boot 3\
 🔹 Spring Security, JWT\
-🔹 Hibernate, JPA, PostgreSQL\
+🔹 Hibernate, JPA, PostgreSQL
 
 **Frontend:**\
 🔹 JavaScript\
-🔹 CSS\
+🔹 CSS
 
 **Other:**\
 🔹 Docker, Docker Compose\
@@ -58,7 +58,7 @@ To run the application locally, you need:
    ```
 2. Build the project:
    ```sh
-   ./mvnw clean install
+   ./mvnw clean package -DskipTests
    ```
 3. Run the application:
    ```sh
@@ -77,5 +77,5 @@ docker-compose up -d
 
 ## 🔗 Contact
 
-📩 Author: **Olaf Szyncel**\
+📩 Author: **Olaf Szyncel**
 
