@@ -53,8 +53,8 @@ To run the application locally, you need:
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repository.git
-   cd your-repository
+   git clone https://github.com/olafszyncel/InstagramClone.git
+   cd InstagramClone
    ```
 2. Build the project:
    ```sh
