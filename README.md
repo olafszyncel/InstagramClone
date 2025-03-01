@@ -56,7 +56,6 @@ To run the application locally, you need:
 - 📌 **Java 17**
 - 📌 **Docker & Docker Compose**
 
----
 
 ## 🏗️ Installation & Setup
 
@@ -81,31 +80,6 @@ To start a PostgreSQL database in a Docker container, use the following command:
 ```sh
 docker-compose up -d
 ```
-
----
-
-## 📝 API Endpoints
-
-📌 **Authentication**
-
-- `POST /auth/register` – User registration
-- `POST /auth/login` – Login and obtain JWT token
-
-📌 **Posts**
-
-- `GET /posts` – Fetch all posts (pagination)
-- `POST /posts` – Create a new post
-- `DELETE /posts/{id}` – Delete a post
-
-📌 **Likes & Comments**
-
-- `POST /posts/{id}/like` – Like a post
-- `POST /posts/{id}/comment` – Add a comment
-
-📌 **Users**
-
-- `GET /users/{username}` – Fetch user profile
-- `PUT /users/{id}` – Edit user profile
 
 ---
 
