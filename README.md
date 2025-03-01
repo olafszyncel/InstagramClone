@@ -15,11 +15,11 @@ SzyncPound is a modern social media application that allows users to publish pos
 ## 🚀 Features
 
 - ✅ User registration and login (Spring Security, JWT)
-- ✅ Posting with images
-- ✅ Like and comment system
+- ✅ Posting with images and description
+- ✅ Like, comment and following system
 - ✅ User profile page
 - ✅ Infinite scroll for posts
-- ✅ User and post search
+- ✅ User search
 - ✅ Responsive design (CSS)
 
 ---
