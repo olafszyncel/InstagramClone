@@ -82,52 +82,6 @@ create table comments
             references users
 );
 
-INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (59, 'jakie niezle masz kaski landooooo, landooooo, landoooooooooooooooooooooooooooooo', '2025-02-26 12:37:22.548152', 8, 1);
-INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (80, 'lo', '2025-02-27 12:53:25.736471', 3, 1);
-INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (84, 'ok', '2025-02-27 12:57:43.668714', 8, 1);
-INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (85, 'ol', '2025-02-27 12:59:14.122518', 8, 1);
-INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (87, 'lol', '2025-02-28 14:57:47.440578', 19, 1);
-INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (89, 'Dawaj Lewy', '2025-02-28 14:58:14.290085', 19, 1);
-INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (90, 'Nice helmet', '2025-03-01 09:19:57.412553', 9, 1);
-INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (91, '<3', '2025-03-01 09:20:27.983203', 9, 2);
-
-INSERT INTO follows (id, created_on, follower, following) VALUES (15, '2025-02-22 19:41:37.296982', 4, 1);
-INSERT INTO follows (id, created_on, follower, following) VALUES (29, '2025-02-25 19:15:43.787706', 2, 1);
-INSERT INTO follows (id, created_on, follower, following) VALUES (32, '2025-02-27 13:10:22.752129', 1, 2);
-INSERT INTO follows (id, created_on, follower, following) VALUES (35, '2025-02-28 14:13:25.895746', 1, 9);
-INSERT INTO follows (id, created_on, follower, following) VALUES (36, '2025-02-28 14:58:56.768431', 1, 5);
-INSERT INTO follows (id, created_on, follower, following) VALUES (38, '2025-03-01 09:21:16.928020', 1, 6);
-INSERT INTO follows (id, created_on, follower, following) VALUES (39, '2025-03-01 09:21:31.622719', 2, 6);
-INSERT INTO follows (id, created_on, follower, following) VALUES (40, '2025-03-01 09:21:49.374026', 6, 8);
-INSERT INTO follows (id, created_on, follower, following) VALUES (41, '2025-03-01 09:22:02.462702', 8, 6);
-INSERT INTO follows (id, created_on, follower, following) VALUES (42, '2025-03-01 09:22:15.082642', 7, 6);
-
-INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2004, '2025-02-27 22:08:39.061874', 12, 1);
-INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2007, '2025-02-27 22:18:11.941936', 9, 1);
-INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2008, '2025-02-27 22:18:14.405894', 8, 1);
-INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2010, '2025-02-27 22:29:52.832440', 11, 1);
-INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2011, '2025-02-28 14:57:42.587757', 19, 1);
-INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2012, '2025-02-28 14:58:02.579839', 14, 1);
-INSERT INTO likes (id, created_on, post_id, user_id) VALUES (71, '2025-02-25 19:22:40.222041', 8, 2);
-INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2014, '2025-02-28 15:48:49.175619', 3, 1);
-INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2016, '2025-03-01 09:20:17.597836', 9, 2);
-INSERT INTO likes (id, created_on, post_id, user_id) VALUES (86, '2025-02-27 13:31:26.856842', 11, 6);
-INSERT INTO likes (id, created_on, post_id, user_id) VALUES (87, '2025-02-27 13:31:27.885200', 10, 6);
-INSERT INTO likes (id, created_on, post_id, user_id) VALUES (88, '2025-02-27 13:31:29.608846', 9, 6);
-INSERT INTO likes (id, created_on, post_id, user_id) VALUES (89, '2025-02-27 13:31:30.591700', 8, 6);
-
-INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (8, 'We are dog runners We are dog runners We are dog runners We are dog runners We are dog runners We are dog runners We are dog runners We are dog runners ', '2025-02-25 19:03:41.138870', 'https://pbs.twimg.com/media/GRtvjfWXEAAiwj9?format=jpg&name=large', '2025-02-25 19:03:41.138870', 2);
-INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (3, 'we are running', '2025-02-20 19:46:57.447485', 'https://blog.therunexperience.com/blog/content/images/wordpress/2020/07/Featured-Image-4.png', '2025-02-26 21:09:43.223438', 1);
-INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (9, 'My hero', '2025-02-27 13:29:09.392504', 'https://pbs.twimg.com/media/GOCPjtjXUAA5zxL?format=jpg&name=4096x4096', '2025-02-27 13:29:09.392504', 5);
-INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (10, 'happy', '2025-02-27 13:29:33.436391', 'https://pbs.twimg.com/media/GNtCh1GWQAAS1QH?format=jpg&name=large', '2025-02-27 13:29:33.436391', 5);
-INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (11, 'first win', '2025-02-27 13:30:02.899138', 'https://pbs.twimg.com/media/GM2R98yXcAAhB5x?format=jpg&name=large', '2025-02-27 13:30:02.899138', 5);
-INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (12, 'Looking good in red', '2025-02-27 13:31:20.334252', 'https://pbs.twimg.com/media/GkPC1cdXMAABe5t?format=jpg&name=large', '2025-02-27 13:31:20.334252', 6);
-INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (14, 'new helmet', '2025-02-27 13:32:32.584920', 'https://pbs.twimg.com/media/Gh4aPukXsAAwL7g?format=jpg&name=large', '2025-02-27 13:32:32.584920', 6);
-INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (15, 'keep scoring', '2025-02-27 13:33:32.256517', 'https://pbs.twimg.com/media/GkqSTp7WYAEpw5D?format=jpg&name=large', '2025-02-27 13:33:32.256517', 7);
-INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (17, 'Merry Christmas', '2025-02-27 13:35:49.178197', 'https://pbs.twimg.com/media/GCM8Y9OW0AAhB-P?format=jpg&name=medium', '2025-02-27 13:35:49.178197', 8);
-INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (18, 'Our little rookie :D', '2025-02-27 13:37:16.859277', 'https://pbs.twimg.com/media/GktVYi4WcAIF3Is?format=jpg&name=4096x4096', '2025-02-27 13:37:16.859277', 9);
-INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (19, 'Training hard', '2025-02-27 13:38:13.110417', 'https://pbs.twimg.com/media/GkuXGgFWUAAr5fg?format=jpg&name=small', '2025-02-27 13:38:13.110417', 8);
-
 INSERT INTO roles (id, name) VALUES (1, 'ADMIN');
 INSERT INTO roles (id, name) VALUES (2, 'MOD');
 INSERT INTO roles (id, name) VALUES (3, 'INFLUENCER');
@@ -151,3 +105,53 @@ INSERT INTO users_roles (user_id, role_id) VALUES (6, 4);
 INSERT INTO users_roles (user_id, role_id) VALUES (7, 4);
 INSERT INTO users_roles (user_id, role_id) VALUES (8, 4);
 INSERT INTO users_roles (user_id, role_id) VALUES (9, 4);
+
+INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (8, 'We are dog runners We are dog runners We are dog runners We are dog runners We are dog runners We are dog runners We are dog runners We are dog runners ', '2025-02-25 19:03:41.138870', 'https://pbs.twimg.com/media/GRtvjfWXEAAiwj9?format=jpg&name=large', '2025-02-25 19:03:41.138870', 2);
+INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (3, 'we are running', '2025-02-20 19:46:57.447485', 'https://blog.therunexperience.com/blog/content/images/wordpress/2020/07/Featured-Image-4.png', '2025-02-26 21:09:43.223438', 1);
+INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (9, 'My hero', '2025-02-27 13:29:09.392504', 'https://pbs.twimg.com/media/GOCPjtjXUAA5zxL?format=jpg&name=4096x4096', '2025-02-27 13:29:09.392504', 5);
+INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (10, 'happy', '2025-02-27 13:29:33.436391', 'https://pbs.twimg.com/media/GNtCh1GWQAAS1QH?format=jpg&name=large', '2025-02-27 13:29:33.436391', 5);
+INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (11, 'first win', '2025-02-27 13:30:02.899138', 'https://pbs.twimg.com/media/GM2R98yXcAAhB5x?format=jpg&name=large', '2025-02-27 13:30:02.899138', 5);
+INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (12, 'Looking good in red', '2025-02-27 13:31:20.334252', 'https://pbs.twimg.com/media/GkPC1cdXMAABe5t?format=jpg&name=large', '2025-02-27 13:31:20.334252', 6);
+INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (14, 'new helmet', '2025-02-27 13:32:32.584920', 'https://pbs.twimg.com/media/Gh4aPukXsAAwL7g?format=jpg&name=large', '2025-02-27 13:32:32.584920', 6);
+INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (15, 'keep scoring', '2025-02-27 13:33:32.256517', 'https://pbs.twimg.com/media/GkqSTp7WYAEpw5D?format=jpg&name=large', '2025-02-27 13:33:32.256517', 7);
+INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (17, 'Merry Christmas', '2025-02-27 13:35:49.178197', 'https://pbs.twimg.com/media/GCM8Y9OW0AAhB-P?format=jpg&name=medium', '2025-02-27 13:35:49.178197', 8);
+INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (18, 'Our little rookie :D', '2025-02-27 13:37:16.859277', 'https://pbs.twimg.com/media/GktVYi4WcAIF3Is?format=jpg&name=4096x4096', '2025-02-27 13:37:16.859277', 9);
+INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (19, 'Training hard', '2025-02-27 13:38:13.110417', 'https://pbs.twimg.com/media/GkuXGgFWUAAr5fg?format=jpg&name=small', '2025-02-27 13:38:13.110417', 8);
+
+INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (59, 'jakie niezle masz kaski landooooo, landooooo, landoooooooooooooooooooooooooooooo', '2025-02-26 12:37:22.548152', 8, 1);
+INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (80, 'lo', '2025-02-27 12:53:25.736471', 3, 1);
+INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (84, 'ok', '2025-02-27 12:57:43.668714', 8, 1);
+INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (85, 'ol', '2025-02-27 12:59:14.122518', 8, 1);
+INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (87, 'lol', '2025-02-28 14:57:47.440578', 19, 1);
+INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (89, 'Dawaj Lewy', '2025-02-28 14:58:14.290085', 19, 1);
+INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (90, 'Nice helmet', '2025-03-01 09:19:57.412553', 9, 1);
+INSERT INTO comments (id, content, created_on, post_id, user_id) VALUES (91, '<3', '2025-03-01 09:20:27.983203', 9, 2);
+
+INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2004, '2025-02-27 22:08:39.061874', 12, 1);
+INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2007, '2025-02-27 22:18:11.941936', 9, 1);
+INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2008, '2025-02-27 22:18:14.405894', 8, 1);
+INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2010, '2025-02-27 22:29:52.832440', 11, 1);
+INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2011, '2025-02-28 14:57:42.587757', 19, 1);
+INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2012, '2025-02-28 14:58:02.579839', 14, 1);
+INSERT INTO likes (id, created_on, post_id, user_id) VALUES (71, '2025-02-25 19:22:40.222041', 8, 2);
+INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2014, '2025-02-28 15:48:49.175619', 3, 1);
+INSERT INTO likes (id, created_on, post_id, user_id) VALUES (2016, '2025-03-01 09:20:17.597836', 9, 2);
+INSERT INTO likes (id, created_on, post_id, user_id) VALUES (86, '2025-02-27 13:31:26.856842', 11, 6);
+INSERT INTO likes (id, created_on, post_id, user_id) VALUES (87, '2025-02-27 13:31:27.885200', 10, 6);
+INSERT INTO likes (id, created_on, post_id, user_id) VALUES (88, '2025-02-27 13:31:29.608846', 9, 6);
+INSERT INTO likes (id, created_on, post_id, user_id) VALUES (89, '2025-02-27 13:31:30.591700', 8, 6);
+
+INSERT INTO follows (id, created_on, follower, following) VALUES (15, '2025-02-22 19:41:37.296982', 4, 1);
+INSERT INTO follows (id, created_on, follower, following) VALUES (29, '2025-02-25 19:15:43.787706', 2, 1);
+INSERT INTO follows (id, created_on, follower, following) VALUES (32, '2025-02-27 13:10:22.752129', 1, 2);
+INSERT INTO follows (id, created_on, follower, following) VALUES (35, '2025-02-28 14:13:25.895746', 1, 9);
+INSERT INTO follows (id, created_on, follower, following) VALUES (36, '2025-02-28 14:58:56.768431', 1, 5);
+INSERT INTO follows (id, created_on, follower, following) VALUES (38, '2025-03-01 09:21:16.928020', 1, 6);
+INSERT INTO follows (id, created_on, follower, following) VALUES (39, '2025-03-01 09:21:31.622719', 2, 6);
+INSERT INTO follows (id, created_on, follower, following) VALUES (40, '2025-03-01 09:21:49.374026', 6, 8);
+INSERT INTO follows (id, created_on, follower, following) VALUES (41, '2025-03-01 09:22:02.462702', 8, 6);
+INSERT INTO follows (id, created_on, follower, following) VALUES (42, '2025-03-01 09:22:15.082642', 7, 6);
+
+
+
+
