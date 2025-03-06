@@ -52,4 +52,31 @@ public class UserServiceImpl implements UserService {
     public List<String> searchUsers(String query) {
         return userRepository.searchUsernames(query);
     }
+
+    @Override
+    public List<Object[]> searchOnlyUsersAndInfluencers(String query) {
+        return userRepository.searchUsernamesAndRoles(query);
+    }
+
+    @Override
+    public List<Object[]> searchUsersInfluencersAndMods(String query) {
+        return userRepository.searchUsernamesAndRolesWithMods(query);
+    }
+
+    @Override
+    public String changeRole(String username, String roleToChange) {
+        UserEntity user = findByUsername(username);
+        Role role = roleRepository.findByName(roleToChange);
+
+        if(user.getRoles().contains(role)) {
+            user.getRoles().remove(role);
+            userRepository.save(user);
+            return "un" + roleToChange;
+        }
+
+        user.getRoles().add(role);
+        userRepository.save(user);
+
+        return roleToChange;
+    }
 }

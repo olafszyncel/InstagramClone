@@ -1,6 +1,6 @@
 <html
         xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
         layout:decorate="~{layout}">
 <head>
     <title th:text="${post.user.username}">post</title>
@@ -79,7 +79,7 @@
             </div>
 
             <div class="coment-box" >
-                <div class="new-comment-container">
+                <div sec:authorize="!hasRole('BANNED')" rows="1" class="new-comment-container">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="comment-emoji-icon">
                         <path d="M12,16a4.045,4.045,0,0,0,3.225-1.632,1,1,0,1,1,1.55,1.264,6,6,0,0,1-9.55,0,1,1,0,0,1,
                         1.55-1.264A4.045,4.045,0,0,0,12,16ZM1,12A11,11,0,1,1,12,23,11.013,11.013,0,0,1,1,12Zm2,0a9,9,
@@ -88,7 +88,7 @@
                     </svg>
                     <input type="hidden" th:id="'comment-user-' + ${post.id}" th:value="${user.id}">
                     <input type="hidden" th:id="'comment-username-' + ${post.id}" th:value="${user.username}">
-                    <textarea rows="1" oninput="resizeTextarea(this)"
+                    <textarea  oninput="resizeTextarea(this)"
                               maxlength="250" class="comment-input"
                               th:id="'comment-input-' + ${post.id}"></textarea>
                     <!-- show how many characters is used

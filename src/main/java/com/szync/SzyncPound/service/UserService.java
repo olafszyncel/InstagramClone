@@ -14,4 +14,9 @@ public interface UserService {
     UserEntity findByUsername(String username);
 
     List<String> searchUsers(String query);
+    List<Object[]> searchOnlyUsersAndInfluencers(String query);
+    List<Object[]> searchUsersInfluencersAndMods(String query);
+
+
+    String changeRole(String username, String roleToChange);
 }

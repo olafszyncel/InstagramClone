@@ -1,0 +1,29 @@
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
+        layout:decorate="~{layout}">
+<head>
+    <title>Creating post...</title>
+    <link rel="stylesheet" th:href="@{/css/management.css}">
+    <script th:src="@{/js/management.js}"></script>
+</head>
+
+<body>
+<main layout:fragment="main">
+
+    <div class="feed-container">
+        <a th:href="@{/management}"><button class="new-post-button">Manage Users</button></a>
+
+        <h6 class="header-management-search">Search for (not banned) user to add or remove MOD role</h6>
+
+        <div class="post">
+            <div class="search-management-container">
+                <input type="text" placeholder="Search..." oninput="managementSearch('mod')" autocomplete="off" class="management-search">
+                <div class="search-management-result-container"></div>
+            </div>
+        </div>
+
+    </div>
+</main>
+</body>
+</html>

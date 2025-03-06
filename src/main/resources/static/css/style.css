@@ -74,6 +74,9 @@ svg {
 .close-search{
     display: none;
 }
+.management-color {
+    fill: #ff55aa;
+}
 
 @media (max-width: 768px) {
     svg {
@@ -131,6 +134,20 @@ svg {
         left: 20px;
         width: 30px;
         height: 30px;
+    }
+
+    #management-icon-box {
+        position: absolute;
+        bottom: 60px;
+        left: 10px;
+        background: #fff;
+        border-radius: 100%;
+        border: solid 2px #333;
+        width: 34px;
+        height: 34px;
+    }
+    #management-icon {
+        margin: 6px 0 0 7px;
     }
 
 }

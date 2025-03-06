@@ -3,12 +3,17 @@ package com.szync.SzyncPound.controllers;
 import com.szync.SzyncPound.dto.PostDto;
 import com.szync.SzyncPound.models.Post;
 import com.szync.SzyncPound.models.UserEntity;
+import com.szync.SzyncPound.security.CustomUserDetailsService;
 import com.szync.SzyncPound.security.SecurityUtil;
 import com.szync.SzyncPound.service.FollowService;
 import com.szync.SzyncPound.service.PostService;
 import com.szync.SzyncPound.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,15 +25,17 @@ import org.springframework.data.domain.Page;
 
 @Controller
 public class PostController {
+    private CustomUserDetailsService customUserDetailsService;
     private UserService userService;
     private PostService postService;
     private FollowService followService;
 
     @Autowired
-    public PostController(UserService userService, PostService postService, FollowService followService) {
+    public PostController(UserService userService, PostService postService, FollowService followService, CustomUserDetailsService customUserDetailsService) {
         this.userService = userService;
         this.postService = postService;
         this.followService = followService;
+        this.customUserDetailsService = customUserDetailsService;
     }
 
     String redirectToPost = "redirect:/post";
@@ -85,10 +92,14 @@ public class PostController {
         return null;
     }
 
+
     @GetMapping("/post/new")
     public String newPost(Model model) {
         String email = SecurityUtil.getSessionUser();
-        if(email != null) {
+        if(email != null && customUserDetailsService.
+                loadUserByUsername(email).getAuthorities().
+                stream().noneMatch(a -> a.getAuthority().equals("ROLE_BANNED")))
+        {
             model.addAttribute("post", new Post());
             return "post-create";
         }
@@ -102,7 +113,10 @@ public class PostController {
             return "post-create";
         }
         String email = SecurityUtil.getSessionUser();
-        if(email != null) {
+        if(email != null && customUserDetailsService.
+                loadUserByUsername(email).getAuthorities().
+                stream().noneMatch(a -> a.getAuthority().equals("ROLE_BANNED")))
+        {
             UserEntity user = userService.findByEmail(email);
             postService.createPost(user.getId(), post);
             return redirectToMain;
@@ -127,7 +141,10 @@ public class PostController {
     public String editPost(@PathVariable("postId") Long postId, Model model) {
         PostDto post = postService.findPostById(postId);
         String email = SecurityUtil.getSessionUser();
-        if(email != null) {
+        if(email != null && customUserDetailsService.
+                loadUserByUsername(email).getAuthorities().
+                stream().noneMatch(a -> a.getAuthority().equals("ROLE_BANNED")))
+        {
             UserEntity user = userService.findByEmail(email);
             model.addAttribute("user", user);
             model.addAttribute("post", post);

@@ -8,6 +8,7 @@ import com.szync.SzyncPound.security.SecurityUtil;
 import com.szync.SzyncPound.service.CommentService;
 import com.szync.SzyncPound.service.PostService;
 import com.szync.SzyncPound.service.UserService;
+import com.szync.SzyncPound.security.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,12 +26,14 @@ public class CommentController {
     private CommentService commentService;
     private PostService postService;
     private UserService userService;
+    private CustomUserDetailsService customUserDetailsService;
 
     @Autowired
-    public void setCommentService(CommentService commentService, PostService postService, UserService userService) {
+    public void setCommentService(CommentService commentService, PostService postService, UserService userService, CustomUserDetailsService customUserDetailsService) {
         this.commentService = commentService;
         this.postService = postService;
         this.userService = userService;
+        this.customUserDetailsService = customUserDetailsService;
     }
 
     @PostMapping("/comment/{postId}/new")
@@ -40,8 +43,12 @@ public class CommentController {
             return ResponseEntity.badRequest().build();
         }
         String email = SecurityUtil.getSessionUser();
-        if(email != null) {
+        if(email != null && customUserDetailsService.
+                loadUserByUsername(email).getAuthorities().
+                stream().noneMatch(a -> a.getAuthority().equals("ROLE_BANNED")))
+        {
             UserEntity user = userService.findByEmail(email);
+
             if(user.getId() != commentRequest.getUserId()) {
                 return ResponseEntity.badRequest().build();
             }

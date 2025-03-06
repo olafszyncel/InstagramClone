@@ -1,0 +1,53 @@
+
+.header-management-search {
+    font-size: 20px;
+    color: #fff;
+    font-weight: bold;
+    margin: 10px auto;
+}
+.search-management-container {
+    display: grid;
+    height: 46px;
+    font-size: 20px;
+}
+
+.management-search {
+    height: 30px;
+    width: 90%;
+    border-radius: 5px;
+    margin: 5px auto;
+}
+
+.search-management-result-container {
+    width: 100%;
+    margin: auto;
+}
+
+.management-result-box {
+    border-radius: 5px;
+    background: #fff;
+    height: 46px;
+    margin-top: 5px;
+    position: relative;
+    display: flex;
+}
+.management-result-text {
+    font-size: 16px;
+    margin: auto 5%;
+}
+.block-button {
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: #ff55aa;
+    color: #fff;
+    height: 30px;
+    margin: 5px 5px;
+    position: absolute;
+    right: 5px;
+    width: 100px;
+    height: 36px;
+}
+
+.management-color {
+    fill: #ff55aa;
+}

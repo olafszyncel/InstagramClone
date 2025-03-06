@@ -1,6 +1,5 @@
 package com.szync.SzyncPound.security;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +33,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "register","/css/**", "/js/**", "/icons/**").permitAll()
+                        .requestMatchers("/management/**").hasAnyRole("ADMIN", "MOD")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -42,7 +42,8 @@ public class SecurityConfig {
                         .loginProcessingUrl("/login")
                         .failureUrl("/login?error=true")
                         .permitAll()
-                ).logout(logout -> logout
+                )
+                .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout=true")
                         .permitAll()

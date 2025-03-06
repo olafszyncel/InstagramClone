@@ -56,6 +56,7 @@ function loadMorePosts(path) {
             let posts = result.content;
             if (posts.length > 0) {
 
+
                 posts.forEach(post => {
 
                     const postElement = document.createElement('div');
