@@ -78,7 +78,7 @@ docker-compose up -d
 ---
 ---
 
-## ⬆️ Update: User Management
+## ⬆️ Updates
 - Update 1.01 A user management module has been added
 
 ## 🔗 Contact
