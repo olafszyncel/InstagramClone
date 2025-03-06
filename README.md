@@ -72,8 +72,14 @@ To start a PostgreSQL database in a Docker container, use the following command:
 ```sh
 docker-compose up -d
 ```
-
+## 🔑 Administrator Credentials
+- Email: `admin@admin.com`
+- Password: `admin`
 ---
+---
+
+## ⬆️ Update: User Management
+- Update 1.01 A user management module has been added
 
 ## 🔗 Contact
 
