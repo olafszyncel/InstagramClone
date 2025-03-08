@@ -96,6 +96,7 @@ INSERT INTO users (id, email, full_name, password, username) VALUES (6, 'lewis@l
 INSERT INTO users (id, email, full_name, password, username) VALUES (7, 'cr7@cr7.com', null, '$2a$10$VLaCID.JtQS1t.GQf/eIG.VCMR7b.5QtnRLMw5TwwBij6QZb/XNbu', 'cr7');
 INSERT INTO users (id, email, full_name, password, username) VALUES (8, 'rl9@rl9.com', null, '$2a$10$3D9MkNvzoh.92wpBftZ3NurVt.oiIoPIGJxs5pY1mTWsgihYKrSfm', 'rl9');
 INSERT INTO users (id, email, full_name, password, username) VALUES (9, 'mercedes@mercedes.com', null, '$2a$10$GgBUgr4LUu9u8/rWZ8Efi..iUAe2kE/kPO1C7f7zDxp722.3eRveq', 'mercedes');
+INSERT INTO users (id, email, full_name, password, username) VALUES (10, 'admin@admin.com', null, '$2a$10$RdMQ33.xswQ4XIeAEY5ueeaFp6xN/Q.cVILcapA6BXSBMIJfDX0zq', 'admin');
 
 INSERT INTO users_roles (user_id, role_id) VALUES (2, 4);
 INSERT INTO users_roles (user_id, role_id) VALUES (3, 4);
@@ -105,6 +106,9 @@ INSERT INTO users_roles (user_id, role_id) VALUES (6, 4);
 INSERT INTO users_roles (user_id, role_id) VALUES (7, 4);
 INSERT INTO users_roles (user_id, role_id) VALUES (8, 4);
 INSERT INTO users_roles (user_id, role_id) VALUES (9, 4);
+INSERT INTO users_roles (user_id, role_id) VALUES (10, 4);
+INSERT INTO users_roles (user_id, role_id) VALUES (10, 1);
+INSERT INTO users_roles (user_id, role_id) VALUES (10, 2);
 
 INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (8, 'We are dog runners We are dog runners We are dog runners We are dog runners We are dog runners We are dog runners We are dog runners We are dog runners ', '2025-02-25 19:03:41.138870', 'https://pbs.twimg.com/media/GRtvjfWXEAAiwj9?format=jpg&name=large', '2025-02-25 19:03:41.138870', 2);
 INSERT INTO posts (id, content, created_on, photo_url, updated_on, user_id) VALUES (3, 'we are running', '2025-02-20 19:46:57.447485', 'https://blog.therunexperience.com/blog/content/images/wordpress/2020/07/Featured-Image-4.png', '2025-02-26 21:09:43.223438', 1);
