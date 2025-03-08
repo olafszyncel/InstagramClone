@@ -47,5 +47,56 @@ function changeRoleHandler(user, role) {
                 button.innerText =`Un${role}`;
             }
 
-        })
+        });
 }
+
+let modsPage = 0;
+let modsPageSize = 3;
+
+function loadAllMods(pageDiff) {
+    const resultsContainer = document.querySelector(".management-result-container");
+    const previousButton = document.getElementById("previous-mods-page");
+    const nextButton = document.getElementById("next-mods-page");
+    modsPage += pageDiff;
+
+    if(modsPage === 0) {
+        previousButton.classList.add("disabled");
+    } else {
+        previousButton.classList.remove("disabled");
+    }
+
+    fetch(`/management/search/all/mods?page=${modsPage}&size=${modsPageSize}`)
+        .then(response => response.json())
+        .then(result => {
+
+
+            let list = result.content;
+            if(list.length > 0) {
+                resultsContainer.innerHTML = "";
+                nextButton.classList.remove("disabled");
+                let modBox;
+                list.forEach(mod => {
+                    modBox = document.createElement("div");
+                    modBox.classList.add("management-result-box");
+
+                    modBox.innerHTML =  `<div class="management-result-text">${mod}</div>`
+                    resultsContainer.appendChild(modBox);
+                })
+                fetch(`/management/search/all/mods?page=${modsPage+1}&size=${modsPageSize}`)
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.content.length <= 0) {
+                            nextButton.classList.add("disabled");
+                        }
+                    })
+            } else if(list.length < modsPageSize){
+                nextButton.classList.add("disabled");
+            } else {
+                nextButton.classList.add("disabled");
+            }
+        });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadAllMods(0);
+})

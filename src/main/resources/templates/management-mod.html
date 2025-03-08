@@ -11,12 +11,26 @@
 <body>
 <main layout:fragment="main">
 
-    <div class="feed-container">
+    <div class="management-container">
         <a th:href="@{/management}"><button class="new-post-button">Manage Users</button></a>
 
-        <h6 class="header-management-search">Search for (not banned) user to add or remove MOD role</h6>
+        <div class="management-box">
+            <h6 class="header-management-search">All users with MOD role</h6>
+            <div class="search-management-container">
+                <div class="management-result-container"></div>
+                <div class="next-previous-buttons">
+                    <button class="next-previous-button" onclick="loadAllMods(-1)" id="previous-mods-page">< Previous</button>
+                    <button class="next-previous-button" onclick="loadAllMods(1)" id="next-mods-page">Next ></button>
+                </div>
 
-        <div class="post">
+
+            </div>
+        </div>
+
+
+
+        <div class="management-box">
+            <h6 class="header-management-search">Search for (not banned) user to add or remove MOD role</h6>
             <div class="search-management-container">
                 <input type="text" placeholder="Search..." oninput="managementSearch('mod')" autocomplete="off" class="management-search">
                 <div class="search-management-result-container"></div>

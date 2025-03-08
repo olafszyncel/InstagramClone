@@ -1,4 +1,13 @@
-
+.management-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: grid;
+}
+.management-box {
+    margin-bottom: 50px;
+    height: 250px;
+}
 .header-management-search {
     font-size: 20px;
     color: #fff;
@@ -21,6 +30,30 @@
 .search-management-result-container {
     width: 100%;
     margin: auto;
+}
+
+.management-result-container {
+    width: 100%;
+    margin: auto;
+}
+
+.next-previous-buttons {
+    display: flex;
+    margin: 0 auto;
+}
+.next-previous-button {
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+    background: #94d;
+    color: #fff;
+    border-radius: 3px;
+    border: solid 2px #6a11cb ;
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .management-result-box {
