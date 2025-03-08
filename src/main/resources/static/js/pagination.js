@@ -45,7 +45,6 @@ function whenCreated(createdOn) {
 
 
 function loadMorePosts(path) {
-
     loading = true;
     document.getElementById('loading').style.display = 'block';
     path = path === "/" ? "" : path;

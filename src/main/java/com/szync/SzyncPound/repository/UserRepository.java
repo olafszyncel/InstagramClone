@@ -1,6 +1,7 @@
 package com.szync.SzyncPound.repository;
 
 import com.szync.SzyncPound.models.UserEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -19,4 +20,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     @Query("SELECT u.username, STRING_AGG(CASE WHEN r.name = 'MOD' THEN r.name ELSE NULL END, ',')  FROM users u JOIN u.roles r WHERE (LOWER(u.username) LIKE LOWER(CONCAT(:query, '%')) OR LOWER(u.username) LIKE LOWER(CONCAT('%', :query, '%'))) AND NOT EXISTS ( SELECT 1 FROM u.roles r WHERE r.name IN ('BANNED')) GROUP BY u.username ORDER BY CASE WHEN LOWER(u.username) LIKE LOWER(CONCAT(:query, '%')) THEN 0 ELSE 1 END, u.username LIMIT 10")
     List<Object[]> searchUsernamesAndRolesWithMods(String query);
+
+    @Query("SELECT u.username FROM users u JOIN u.roles r WHERE EXISTS ( SELECT 1 FROM u.roles r WHERE r.name IN ('MOD')) GROUP BY u.username")
+    List<String> searchAllMods(Pageable pageable);
 }

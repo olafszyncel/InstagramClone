@@ -6,6 +6,8 @@ import com.szync.SzyncPound.service.FollowService;
 import com.szync.SzyncPound.service.PostService;
 import com.szync.SzyncPound.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -57,6 +59,7 @@ public class ManagementController {
         return ResponseEntity.ok(Map.of("roleStatus", response));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MOD')")
     @GetMapping("/management/mod")
     public String modManagement(Model model) {
         UserEntity user = new UserEntity();
@@ -68,9 +71,18 @@ public class ManagementController {
         return "management-mod";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/management/search/mod")
     public ResponseEntity<List<Object[]>> searchMod(@RequestParam(value="query") String query) {
         List<Object[]> usernames = userService.searchUsersInfluencersAndMods(query);
+        return ResponseEntity.ok(usernames);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/management/search/all/mods")
+    public ResponseEntity<Page<String>> searchAllMods(@RequestParam(defaultValue = "0") int page,
+                                                      @RequestParam(defaultValue = "5") int size) {
+        Page<String> usernames = userService.searchAllMods(PageRequest.of(page, size));
         return ResponseEntity.ok(usernames);
     }
 

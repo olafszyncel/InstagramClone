@@ -7,6 +7,9 @@ import com.szync.SzyncPound.repository.RoleRepository;
 import com.szync.SzyncPound.repository.UserRepository;
 import com.szync.SzyncPound.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +64,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Object[]> searchUsersInfluencersAndMods(String query) {
         return userRepository.searchUsernamesAndRolesWithMods(query);
+    }
+
+    @Override
+    public Page<String> searchAllMods(Pageable pageable) {
+        return new PageImpl<>(userRepository.searchAllMods(pageable));
     }
 
     @Override
