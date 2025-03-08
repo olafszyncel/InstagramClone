@@ -27,7 +27,7 @@ SzyncPound is a modern social media application that allows users to publish pos
 ## 🛠️ Technologies
 
 **Backend:**\
-🔹 Java 17, Spring Boot 3\
+🔹 Java 21, Spring Boot 3\
 🔹 Spring Security, JWT\
 🔹 Hibernate, JPA, PostgreSQL
 
@@ -45,7 +45,7 @@ SzyncPound is a modern social media application that allows users to publish pos
 
 To run the application locally, you need:
 
-- 📌 **Java 17**
+- 📌 **Java 21**
 - 📌 **Docker & Docker Compose**
 
 
@@ -72,8 +72,14 @@ To start a PostgreSQL database in a Docker container, use the following command:
 ```sh
 docker-compose up -d
 ```
-
+## 🔑 Administrator Credentials
+- Email: `admin@admin.com`
+- Password: `admin`
 ---
+---
+
+## ⬆️ Updates
+- Update 1.01 A user management module has been added
 
 ## 🔗 Contact
 
